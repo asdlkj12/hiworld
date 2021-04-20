@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <style type="text/css">
+			body{
+				background-image: url(/images/library3.jpg);
+				margin-top:300px;
+				margin-left: 700px;
+				background-size:cover;
+                background-attachment:fixed
+			}
+			#i1{
+				border: none;
+				width: 120px;
+				height: 30px;
+				border-radius: 15px;
+				background-color: CornflowerBlue;
+				color: white;
+				margin-left: 110px;
+			}
+			h1{
+				color: white;
+			}
+    </style>
+</head>
+<body>
+<h1>please input the self information</h1>
+<form action="/user/userRegister" method="post">
+    <p>
+        <font color="white">username: </font>
+        <input type = "text" name = "name" >;
+    </p>
+    <p>
+        <font color="white">password: </font>
+        <input type = "password"  name = "password" >;
+    </p>
+    <p>
+        <font color="white">confirm password: </font>
+        <input type = "password"  name = "password2" >;
+    </p>
+    <p>
+        <font color="white">role: </font>
+        <select name="role" >
+            <option >author</option>
+            <option >reviewer</option>
+            <option >university</option>
+            <option>student</option>
+        </select>
+    </p>
+    <input type = "submit" value = "register" id = "i1">
+</form>
+</body>
+</html>
