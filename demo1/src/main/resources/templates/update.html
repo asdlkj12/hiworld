@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <title>update book</title>
+</head>
+<body>
+<!--set the style-->
+<div style="width:600px;height:100%;margin-left:700px;">
+    <!--form the information to add-->
+    <form action="/user/update_information" method="post" enctype="multipart/form-data">
+        book ID：<input class="form-control" type="text" th:value="${bookId}" name="bookId"><br>
+        book name：<input class="form-control" type="text" th:value="${bookName}" name="bookName"><br>
+        book author:<input class="form-control" type="text" th:value="${authorName}" name="authorName"><br>
+        keyWord:<select class="form-control" type="text" th:value="${keyWord}" name="keyWord" >
+        <option >COM</option>
+        <option >PHY</option>
+        <option >BIO</option>
+        <option >ART</option>
+        <option >CHE</option>
+        <option >MAT</option>
+    </select>
+        select the PDF:<input class="form-control" type="file" name="file" accept="pdf/*" /> <br>
+        <button class="btn btn-primary btn-lg btn-block">reserve</button>
+    </form>
+</div>
+</body>
+</html>

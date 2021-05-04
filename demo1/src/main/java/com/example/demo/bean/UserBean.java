@@ -4,6 +4,9 @@ public class UserBean {
     private String name;
     private String password;
     private String role;
+    private String field;
+
+    private BookBean bookbean;
 
     public String getName() {
         return name;
@@ -25,9 +28,20 @@ public class UserBean {
 
     public void setRole(String role) { this.role = role; }
 
-    public UserBean(String name, String password, String role){
+    public String getfiled() { return  field; }
+
+    public void setfield(String role) { this.field = field; }
+
+
+    public BookBean getBookBean(){return bookbean;}
+    public void setBookBean(BookBean bookbean){this.bookbean=bookbean;}
+
+
+    public UserBean(String name, String password, String role, String field){
         this.name = name;
         this.password=password;
         this.role=role;
+        this.field=field;
     }
 }
+

@@ -11,7 +11,14 @@
     <form action="/user/insert" method="post" enctype="multipart/form-data">
         book ID：<input class="form-control" type="text" th:value="${bookId}" name="bookId"><br>
         book name：<input class="form-control" type="text" th:value="${bookName}" name="bookName"><br>
-        book author：<input class="form-control" type="text" th:value="${authorName}" name="authorName"><br>
+        keyWord:<select class="form-control" type="text" th:value="${keyWord}" name="keyWord" >
+            <option >COM</option>
+            <option >PHY</option>
+            <option >BIO</option>
+            <option >ART</option>
+            <option >CHE</option>
+            <option >MAT</option>
+        </select>
         select the PDF:<input class="form-control" type="file" name="file" accept="pdf/*" /> <br>
         <button class="btn btn-primary btn-lg btn-block">reserve</button>
     </form>

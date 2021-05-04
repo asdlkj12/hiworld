@@ -26,6 +26,7 @@
         <th>operation</th>
     </tr>
     </thead>
+    <!--display the information-->
 
     <tr th:each="book:${books}">
         <td th:text="${book.bookId}"></td>
@@ -35,7 +36,8 @@
         <td>
             <a class="btn btn-primary" th:href="@{'/user/update/'+${book.bookId}}">update</a>
             <a class="btn btn-danger" th:href="@{'/user/delete/'+${book.bookId}}">delete</a>
-            <a class="btn btn-info" th:href="@{'/user/download/'+${book.bookId}}">downloadPDF</a>
+            <a class="btn btn-info" th:href="@{'/user/preview_certified/'+${book.bookId}}">reviewPDF</a>
+            <a class="btn btn-danger" th:href="@{'/user/comment/'+${book.bookId}}">see comment</a>
         </td>
     </tr>
 </table>

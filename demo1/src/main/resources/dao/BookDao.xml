@@ -1,30 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.dao.BookDao" >
-
+    <!-- connect the mysql and connect the attribute-->
     <resultMap id="BaseResultMap" type="com.example.demo.bean.BookBean" >
         <id column="bookId" property="bookId" jdbcType="VARCHAR" />
         <result column="bookName" property="bookName" jdbcType="VARCHAR" />
         <result column="authorName" property="authorName" jdbcType="VARCHAR" />
         <result column="bookPDF" property="bookPDF" jdbcType="VARCHAR" />
-    </resultMap>
+        <result column="judge1" property="judge1" jdbcType="VARCHAR" />
+        <result column="judge2" property="authorName" jdbcType="VARCHAR" />
+        <result column="judge3" property="authorName" jdbcType="VARCHAR" />
+        <result column="rewer1" property="authorName" jdbcType="VARCHAR" />
+        <result column="rewer2" property="authorName" jdbcType="VARCHAR" />
+        <result column="rewer3" property="authorName" jdbcType="VARCHAR" />
+        <result column="judgerewer" property="authorName" jdbcType="VARCHAR" />
+        <result column="revbook" property="authorName" jdbcType="VARCHAR" />
+        <result column="author" property="authorName" jdbcType="VARCHAR" />
+        <result column="keyword" property="authorName" jdbcType="VARCHAR" />
+        <result column="canre1" property="authorName" jdbcType="VARCHAR" />
+        <result column="canre2" property="authorName" jdbcType="VARCHAR" />
+        <result column="canre3" property="authorName" jdbcType="VARCHAR" />
+        <!--join two tables-->
+        <association property="BookId" column="BookId" javaType="bookbean">
 
+        </association>
+
+    </resultMap>
+    <!--get one book by id-->
     <select id="getbook1" resultType="com.example.demo.bean.BookBean">
         select * from book_review where id = #{bookId}
     </select>
 
+    <select id="getbookndr" resultType="com.example.demo.bean.BookBean">
+        select * from book_review where(judgerewer=canre1 or judgerewer = canre2 or judgerewer=canre3) and( ((judge1 = "null" and judge2 = "null") or (judge1 = "null" and judge3 = "null") or (judge2 = "null" and judge3 = "null") ) and (rewer1 != judgerewer) and (rewer2 != judgerewer) and (rewer3 != judgerewer) or( ( (judge1="YES" and judge2="NO") or (judge1="NO" and judge2="YES") )and (rewer1 != judgerewer) and (rewer2 != judgerewer) and (rewer3 != judgerewer)) )
+    </select>
+
+    <select id="getbookcmr" resultType="com.example.demo.bean.BookBean">
+        select * from book_review where (judge1 != "null" and judge2 != "null") or (judge1 != "null" and judge3 != "null") or (judge2 != "null" and judge3 != "null") or (rewer1 = judgerewer) or (rewer2 = judgerewer) or (rewer3 = judgerewer)
+    </select>
+
+    <select id="getcheck" resultType="com.example.demo.bean.BookBean">
+        select * from book_review where bookId=revbook
+    </select>
+    <!--get all books' information-->
     <select id="getallbook" resultType="com.example.demo.bean.BookBean">
         select * from book_review
     </select>
+    <!--get book's pdf by id-->
     <select id="download" resultType="String">
         select bookPDF from book_review where bookId= #{bookId}
     </select>
-
+    <!--set one book pdf by id-->
     <insert id="uploadPDF" parameterType="String">
         update book_review set bookPDF = #{bookPDF,jdbcType=VARCHAR} where bookId=#{bookId,jdbcType=VARCHAR}
     </insert>
-
-
+    <!--add one book-->
     <insert id="addbook1" parameterType="com.example.demo.bean.BookBean" >
         insert into book_review
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -37,6 +67,9 @@
             <if test="authorName != null" >
                 authorName,
             </if>
+            <if test="keyWord != null" >
+                keyWord,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="bookId != null" >
@@ -48,28 +81,77 @@
             <if test="authorName != null" >
                 #{authorName,jdbcType=VARCHAR},
             </if>
+            <if test="keyWord != null" >
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
 
 
-    <update id="changebook1" parameterType="com.example.demo.bean.BookBean">
-        update book_review
-        <set>
-            <if test="bookName != null" >
-                userName = #{bookName,jdbcType=VARCHAR},
-            </if>
-            <if test="bookId != null" >
-                passWord = #{bookId,jdbcType=VARCHAR},
-            </if>
-            <if test="authorName != null" >
-                realName = #{authorName,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{bookId,jdbcType=VARCHAR}
+    <update id="changejudge1" parameterType="com.example.demo.bean.BookBean">
+
+        update book_review set judge1=#{judge},comment1=#{comment},rewer1=judgerewer where bookId = revbook
+
+
     </update>
 
+    <update id="changejudge2" parameterType="com.example.demo.bean.BookBean">
+
+        update book_review set judge2=#{judge},comment2=#{comment},rewer2=judgerewer where bookId = revbook
+
+
+    </update>
+
+    <update id="changejudge3" parameterType="com.example.demo.bean.BookBean">
+
+        update book_review set judge3=#{judge},comment3=#{comment},rewer3=judgerewer where bookId = revbook
+
+
+    </update>
+    <!--delete one book by id-->
     <delete id="deletebook1" parameterType="String">
         delete from book_review where bookId=#{bookId,jdbcType=VARCHAR}
     </delete>
+
+    <update id="reviewingbook" parameterType="com.example.demo.bean.BookBean">
+
+        update book_review set revbook= #{bookId}
+
+    </update>
+
+    <select id="getjudge1" parameterType="String" resultType="String">
+        select judge1 from book_review where revbook=bookId
+    </select>
+
+    <select id="getjudge2" parameterType="String" resultType="String">
+        select judge2 from book_review where revbook=bookId
+    </select>
+
+    <select id="getjudge3" parameterType="String" resultType="String">
+        select judge3 from book_review where revbook=bookId
+    </select>
+    <!--get author name-->
+    <select id="getName" parameterType="String" resultType="String">
+        select distinct author from book_review
+    </select>
+    <!--get certified book-->
+    <select id="vertify" resultType="com.example.demo.bean.BookBean">
+        select * from book_review where ((judge1 = "YES" and judge2 = "YES") or (judge1 = "YES" and judge3 = "YES") or (judge2 = "YES" and judge3 = "YES") )
+    </select>
+    <!--get one book's comment-->
+    <select id="getComment" resultType="com.example.demo.bean.BookBean">
+        select * from book_review where book_review.bookId=#{bookId}
+    </select>
+    <select id="getrewer" parameterType="String" resultType="String">
+        select  userbean.name from userbean inner join book_review on book_review.keyword=userbean.field where book_review.bookId=#{bookId}
+    </select>
+
+    <update id="distri_re" parameterType="com.example.demo.bean.BookBean">
+
+        update book_review set canre1=#{str1},canre2=#{str2},canre3=#{str3} where bookId=#{bookId}
+
+
+    </update>
+
 
 </mapper>

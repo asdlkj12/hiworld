@@ -10,21 +10,21 @@ import java.util.Map;
 @Service
 public class UserLoginService {
 
-    /**
-     * 注入dao
-     */
     @Autowired
     private UserDao userdao;
 
-    //用户登录
+    //user login
     public UserBean userLogin(String name,String password,String role){
         UserBean userbean = userdao.userLogin(name,password,role);
         return userbean;
     }
 
-    //注册新用户
+    //user register
     public void adduser(String name,String password,String role){
         userdao.adduser(name,password,role);
 
     }
+    public void setrewer(String name){userdao.setrewer(name);};
+    public void setName(String name){userdao.setName(name);};
+
 }

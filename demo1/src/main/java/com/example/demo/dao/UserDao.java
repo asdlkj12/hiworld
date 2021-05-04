@@ -11,7 +11,10 @@ public interface UserDao {
 
     UserBean userLogin(@Param("name") String name,@Param("password") String password, @Param("role") String role);
 
-    //注册新用户(方式1)
+    //user register
     void adduser(@Param("name") String name, @Param("password") String password, @Param("role") String role);
+    void setrewer(@Param("name") String name);
+    //set the name of author
+    void setName(@Param(("name")) String name);
 
 }

@@ -6,25 +6,41 @@
         <id column="name" property="name" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="VARCHAR" />
         <result column="role" property="role" jdbcType="VARCHAR" />
+        <association property="BookId" column="BookId" javaType="userbean">
+
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List" >
         name,
         password,
-        role
+        role,
+        field
     </sql>
 
-    <!--用户登录验证-->
-    <select id="userLogin" parameterType="UserBean" resultType="UserBean"> <!--用userbean，之前用user导致服务器无法启动 -->
+    <!--user login-->
+    <select id="userLogin" parameterType="UserBean" resultType="UserBean">
         SELECT
         <include refid="Base_Column_List" />
         FROM userbean WHERE name = #{name} AND password = #{password} AND role=#{role}
     </select>
 
-    <!--新用户注册  方式1-->
+    <!--user register-->
     <insert id="adduser" parameterType="userbean" keyProperty="name">
         INSERT INTO userbean (name,password,role) VALUES (#{name},#{password},#{role})
     </insert>
+
+    <update id="setrewer" parameterType="com.example.demo.bean.UserBean" >
+
+        update book_review set judgerewer= #{name}
+
+    </update>
+    <!--set the author name-->
+    <update id="setName" parameterType="com.example.demo.bean.UserBean" >
+
+        update book_review set author= #{name}
+
+    </update>
 
 
 </mapper>
