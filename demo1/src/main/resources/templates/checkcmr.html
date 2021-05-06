@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>library</title>
+</head>
+<style>
+    a{
+        color:black;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
+
+<body>
+<h1>These books can be reviewed</h1>
+<table class="table table-striped table-bordered table-hover text-center">
+    <thead>
+    <tr style="text-align:center">
+        <th>judge1</th>
+        <th>comment1</th>
+        <th>reviewer</th>
+    </tr>
+    </thead>
+
+    <tr th:each="book:${books}">
+        <td th:text="${book.judge1}"></td>
+        <td th:text="${book.comment1}"></td>
+        <td th:text="${book.rewer1}"></td>
+        </td>
+    </tr>
+
+    <tr th:each="book:${books}">
+        <td th:text="${book.judge2}"></td>
+        <td th:text="${book.comment2}"></td>
+        <td th:text="${book.rewer2}"></td>
+        </td>
+    </tr>
+
+    <tr th:each="book:${books}">
+        <td th:text="${book.judge3}"></td>
+        <td th:text="${book.comment3}"></td>
+        <td th:text="${book.rewer3}"></td>
+        </td>
+    </tr>
+
+
+</table>
+
+
+</body>
+
+</html>

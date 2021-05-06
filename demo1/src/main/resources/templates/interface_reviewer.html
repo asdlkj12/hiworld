@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>myreviewer</title>
+</head>
+
+<style>
+    body{
+            background-image: url(/images/library3.jpg);
+			background-size:cover;
+            background-attachment:fixed
+    }
+    a{
+        color:black;
+    }
+    h1{
+        text-align: center;
+        color:white
+    }
+    th{
+    color:white
+    }
+</style>
+
+
+<body>
+<h1>review</h1>
+<table class="table table-striped table-bordered table-hover text-center">
+    <thead>
+    <tr>
+        <th> need to review  </th>
+        <th> completed review</th>
+
+    </tr>
+
+    <tr>
+        <th> <button class="btn btn-info" ><a href="/user/ndr">review</a></button></th>
+        <th> <button class="btn btn-primary" ><a href="/user/cmr">review</a></button></th>
+
+    </tr>
+    </thead>
+
+
+</table>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>library</title>
+</head>
+<style>
+    a{
+        color:black;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
+<script>
+    function detail() {
+        window.open("/js/web/viewer.html?file=/preview");
+    }
+</script>
+
+<body>
+<h1>These books are reviewed completely</h1>
+<table class="table table-striped table-bordered table-hover text-center">
+    <thead>
+    <tr style="text-align:center">
+        <th>book ID</th>
+        <th>name</th>
+        <th>author</th>
+        <th>operation</th>
+    </tr>
+    </thead>
+
+    <tr th:each="book:${books}">
+        <td th:text="${book.bookId}"></td>
+        <td th:text="${book.bookName}"></td>
+        <td th:text="${book.authorName}"></td>
+        <td>
+            <a class="btn btn-primary" th:href="@{'/user/check/'+${book.bookId}}">CHECK</a>
+            <a class="btn btn-primary" th:href="@{'/user/preview/'+${book.bookId}}">previewPDF</a>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+
+</html>
